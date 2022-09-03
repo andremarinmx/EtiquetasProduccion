@@ -29,6 +29,7 @@ namespace EtiquetasProduccion.Models
         public Nullable<int> Pcs_Box { get; set; }
         public string Address_ { get; set; }
         public string Customer { get; set; }
+        public string Status_ { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Evidence> Order_Evidence { get; set; }

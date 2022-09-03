@@ -11,7 +11,8 @@ CREATE TABLE Order_(
     Pcs_Order INT,
     Pcs_Box INT,
     Address_ VARCHAR(255),
-    Customer VARCHAR(255)
+    Customer VARCHAR(255),
+    Status_ VARCHAR(6)
 );
 
 CREATE TABLE Evidence(

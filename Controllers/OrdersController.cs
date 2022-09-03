@@ -37,6 +37,7 @@ namespace EtiquetasProduccion.Controllers
                 orden.Address_ = Address;
                 orden.Customer = Customer;
                 orden.Pcs_Box = 0;
+                orden.Status_ = "Open";
                 db.Order_.Add(orden);
                 db.SaveChanges();
                 return View();
