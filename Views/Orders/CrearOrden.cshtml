@@ -1,0 +1,66 @@
+﻿@using (Html.BeginForm("CrearOrden", "Orders"))
+{
+    <div class="form-horizontal">
+
+        <h1>Crear Órden</h1>
+        <h4 style="color:#0094ff;"><strong>Favor de introducir la información solicitada</strong></h4>
+
+        <div class="form-group row">
+            <label class="control-label col-md-3">Order Number</label>
+            <div class="col-md-9">
+                <input class="form-control text-box single-line" name="OrderNumber" required="required" type="text" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-3">Height</label>
+            <div class="col-md-9">
+                <input class="form-control text-box single-line" name="Height" required="required" type="number" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-3">Width</label>
+            <div class="col-md-9">
+                <input class="form-control text-box single-line" name="Width" required="required" type="number" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-3">Line</label>
+            <div class="col-md-9">
+                <input class="form-control text-box single-line" name="Line" required="required" type="number" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-3">Pcs</label>
+            <div class="col-md-9">
+                <input class="form-control text-box single-line" name="PcsOrder" required="required" type="number" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-3">Address</label>
+            <div class="col-md-9">
+                <input class="form-control text-box single-line" name="Address" required="required" type="text" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-3">Customer</label>
+            <div class="col-md-9">
+                <input class="form-control text-box single-line" name="Customer" required="required" type="text" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-3"></label>
+            <div class="col-md-9">
+                <input type="submit" class="btn btn-success" value="Crear" />
+            </div>
+        </div>
+
+    </div>
+
+}
