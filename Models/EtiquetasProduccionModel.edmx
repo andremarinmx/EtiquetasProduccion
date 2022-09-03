@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EtiquetasProduccionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Evidence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Img" Type="varchar(max)" />
+          <Property Name="Date_" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Folio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderNumber" Type="varchar" MaxLength="6" />
+          <Property Name="Total_Pcs" Type="int" />
+          <Property Name="Date_" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Line_Made">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderNumber" Type="varchar" MaxLength="6" />
+          <Property Name="Height" Type="float" />
+          <Property Name="Width" Type="float" />
+          <Property Name="Line_" Type="int" />
+          <Property Name="Pcs_Order" Type="int" />
+          <Property Name="Pcs_Box" Type="int" />
+          <Property Name="Status_" Type="int" />
+        </EntityType>
+        <EntityType Name="Order_">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderNumber" Type="varchar" MaxLength="6" />
+          <Property Name="Height" Type="float" />
+          <Property Name="Width" Type="float" />
+          <Property Name="Line_" Type="int" />
+          <Property Name="Pcs_Order" Type="int" />
+          <Property Name="Pcs_Box" Type="int" />
+          <Property Name="Address_" Type="varchar" MaxLength="255" />
+          <Property Name="Customer" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Order_Evidence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Order" Type="int" />
+          <Property Name="Id_Evidences" Type="int" />
+        </EntityType>
+        <Association Name="FK__Order_Evi__Id_Ev__2A4B4B5E">
+          <End Role="Evidence" Type="Self.Evidence" Multiplicity="0..1" />
+          <End Role="Order_Evidence" Type="Self.Order_Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evidence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order_Evidence">
+              <PropertyRef Name="Id_Evidences" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Evi__Id_Or__29572725">
+          <End Role="Order_" Type="Self.Order_" Multiplicity="0..1" />
+          <End Role="Order_Evidence" Type="Self.Order_Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order_Evidence">
+              <PropertyRef Name="Id_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EtiquetasProduccionModelStoreContainer">
+          <EntitySet Name="Evidence" EntityType="Self.Evidence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Folio" EntityType="Self.Folio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Line_Made" EntityType="Self.Line_Made" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_" EntityType="Self.Order_" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Evidence" EntityType="Self.Order_Evidence" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Order_Evi__Id_Ev__2A4B4B5E" Association="Self.FK__Order_Evi__Id_Ev__2A4B4B5E">
+            <End Role="Evidence" EntitySet="Evidence" />
+            <End Role="Order_Evidence" EntitySet="Order_Evidence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Evi__Id_Or__29572725" Association="Self.FK__Order_Evi__Id_Or__29572725">
+            <End Role="Order_" EntitySet="Order_" />
+            <End Role="Order_Evidence" EntitySet="Order_Evidence" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EtiquetasProduccionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EtiquetasProduccionContext" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Evidence" EntityType="EtiquetasProduccionModel.Evidence" />
+          <EntitySet Name="Folio" EntityType="EtiquetasProduccionModel.Folio" />
+          <EntitySet Name="Line_Made" EntityType="EtiquetasProduccionModel.Line_Made" />
+          <EntitySet Name="Order_" EntityType="EtiquetasProduccionModel.Order_" />
+          <EntitySet Name="Order_Evidence" EntityType="EtiquetasProduccionModel.Order_Evidence" />
+          <AssociationSet Name="FK__Order_Evi__Id_Ev__2A4B4B5E" Association="EtiquetasProduccionModel.FK__Order_Evi__Id_Ev__2A4B4B5E">
+            <End Role="Evidence" EntitySet="Evidence" />
+            <End Role="Order_Evidence" EntitySet="Order_Evidence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Evi__Id_Or__29572725" Association="EtiquetasProduccionModel.FK__Order_Evi__Id_Or__29572725">
+            <End Role="Order_" EntitySet="Order_" />
+            <End Role="Order_Evidence" EntitySet="Order_Evidence" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Evidence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date_" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Order_Evidence" Relationship="EtiquetasProduccionModel.FK__Order_Evi__Id_Ev__2A4B4B5E" FromRole="Evidence" ToRole="Order_Evidence" />
+        </EntityType>
+        <EntityType Name="Folio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNumber" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Pcs" Type="Int32" />
+          <Property Name="Date_" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Line_Made">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNumber" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Width" Type="Double" />
+          <Property Name="Line_" Type="Int32" />
+          <Property Name="Pcs_Order" Type="Int32" />
+          <Property Name="Pcs_Box" Type="Int32" />
+          <Property Name="Status_" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Order_">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNumber" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Width" Type="Double" />
+          <Property Name="Line_" Type="Int32" />
+          <Property Name="Pcs_Order" Type="Int32" />
+          <Property Name="Pcs_Box" Type="Int32" />
+          <Property Name="Address_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Customer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Order_Evidence" Relationship="EtiquetasProduccionModel.FK__Order_Evi__Id_Or__29572725" FromRole="Order_" ToRole="Order_Evidence" />
+        </EntityType>
+        <EntityType Name="Order_Evidence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Order" Type="Int32" />
+          <Property Name="Id_Evidences" Type="Int32" />
+          <NavigationProperty Name="Evidence" Relationship="EtiquetasProduccionModel.FK__Order_Evi__Id_Ev__2A4B4B5E" FromRole="Order_Evidence" ToRole="Evidence" />
+          <NavigationProperty Name="Order_" Relationship="EtiquetasProduccionModel.FK__Order_Evi__Id_Or__29572725" FromRole="Order_Evidence" ToRole="Order_" />
+        </EntityType>
+        <Association Name="FK__Order_Evi__Id_Ev__2A4B4B5E">
+          <End Type="EtiquetasProduccionModel.Evidence" Role="Evidence" Multiplicity="0..1" />
+          <End Type="EtiquetasProduccionModel.Order_Evidence" Role="Order_Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evidence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order_Evidence">
+              <PropertyRef Name="Id_Evidences" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Evi__Id_Or__29572725">
+          <End Type="EtiquetasProduccionModel.Order_" Role="Order_" Multiplicity="0..1" />
+          <End Type="EtiquetasProduccionModel.Order_Evidence" Role="Order_Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order_Evidence">
+              <PropertyRef Name="Id_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EtiquetasProduccionModelStoreContainer" CdmEntityContainer="EtiquetasProduccionContext" >
+          <EntitySetMapping Name="Evidence">
+            <EntityTypeMapping TypeName="EtiquetasProduccionModel.Evidence">
+              <MappingFragment StoreEntitySet="Evidence">
+                <ScalarProperty Name="Date_" ColumnName="Date_" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Folio">
+            <EntityTypeMapping TypeName="EtiquetasProduccionModel.Folio">
+              <MappingFragment StoreEntitySet="Folio">
+                <ScalarProperty Name="Date_" ColumnName="Date_" />
+                <ScalarProperty Name="Total_Pcs" ColumnName="Total_Pcs" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Line_Made">
+            <EntityTypeMapping TypeName="EtiquetasProduccionModel.Line_Made">
+              <MappingFragment StoreEntitySet="Line_Made">
+                <ScalarProperty Name="Status_" ColumnName="Status_" />
+                <ScalarProperty Name="Pcs_Box" ColumnName="Pcs_Box" />
+                <ScalarProperty Name="Pcs_Order" ColumnName="Pcs_Order" />
+                <ScalarProperty Name="Line_" ColumnName="Line_" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_">
+            <EntityTypeMapping TypeName="EtiquetasProduccionModel.Order_">
+              <MappingFragment StoreEntitySet="Order_">
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Address_" ColumnName="Address_" />
+                <ScalarProperty Name="Pcs_Box" ColumnName="Pcs_Box" />
+                <ScalarProperty Name="Pcs_Order" ColumnName="Pcs_Order" />
+                <ScalarProperty Name="Line_" ColumnName="Line_" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Evidence">
+            <EntityTypeMapping TypeName="EtiquetasProduccionModel.Order_Evidence">
+              <MappingFragment StoreEntitySet="Order_Evidence">
+                <ScalarProperty Name="Id_Evidences" ColumnName="Id_Evidences" />
+                <ScalarProperty Name="Id_Order" ColumnName="Id_Order" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
