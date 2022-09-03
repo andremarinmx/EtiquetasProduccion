@@ -42,5 +42,15 @@ namespace EtiquetasProduccion.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult VerOrdenes()
+        {
+            using (EtiquetasProduccionContext db = new EtiquetasProduccionContext())
+            {
+                var ordenes = db.Order_.OrderBy(x => x.OrderNumber).ToList();
+                return View(ordenes);
+            }
+        }
     }
 }
