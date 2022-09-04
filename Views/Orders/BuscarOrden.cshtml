@@ -1,0 +1,13 @@
+﻿@using (Html.BeginForm("IngresarOrden", "Orders"))
+{
+<div class="form-horizontal">
+    <div class="form-group row">
+        <h1>Buscar</h1>
+        <h4 style="color:#0094ff;"><strong>Favor de introducir la información solicitada</strong></h4>
+        <h4>Order Number</h4>
+        <input class="form-control text-box single-line" name="OrderNumber" required="required" type="text" maxlength="6" />
+        <h1></h1>
+        <input type="submit" class="btn btn-success" value="Buscar" />
+    </div>
+</div>
+}

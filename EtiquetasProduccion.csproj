@@ -218,6 +218,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Orders\CrearOrden.cshtml" />
     <Content Include="Views\Orders\VerOrdenes.cshtml" />
+    <Content Include="Views\Orders\BuscarOrden.cshtml" />
+    <Content Include="Views\Orders\IngresarOrden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

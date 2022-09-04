@@ -53,5 +53,60 @@ namespace EtiquetasProduccion.Controllers
                 return View(ordenes);
             }
         }
+
+        [HttpGet]
+        public ActionResult BuscarOrden()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult IngresarOrden(string OrderNumber)
+        {
+            using (EtiquetasProduccionContext db = new EtiquetasProduccionContext())
+            {
+                var orden = db.Order_.Where(x => x.OrderNumber == OrderNumber).ToList();
+                return View(orden);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GenerarFolio(IEnumerable<Lineas> data)
+        {
+            using (EtiquetasProduccionContext db = new EtiquetasProduccionContext())
+            {
+                DateTime now = DateTime.Now;
+                Folio folio = new Folio();
+                Line_Made lineaHechas = new Line_Made();
+                Order_ orden = new Order_();
+                folio.OrderNumber = data.First().OrderNumber;
+                folio.Date_ = now;
+                db.Folio.Add(folio);
+                db.SaveChanges();
+                foreach (var item in data)
+                {
+                    lineaHechas.Folio = folio.Id;
+                    lineaHechas.OrderNumber = item.OrderNumber;
+                    lineaHechas.Height = item.Height;
+                    lineaHechas.Width = item.Width;
+                    lineaHechas.Line_ = item.Line;
+                    lineaHechas.Pcs_Order = item.Pcs_Order;
+                    lineaHechas.Pcs_Box = item.Input;
+                    orden.Pcs_Box = item.Input;
+                    db.Line_Made.Add(lineaHechas);
+                    db.SaveChanges();
+                }
+                return View();
+            }
+        }
+    }
+    public class Lineas
+    {
+        public string OrderNumber { get; set; }
+        public float Height { get; set; }
+        public float Width { get; set; }
+        public int Line { get; set; }
+        public int Pcs_Order { get; set; }
+        public int Input { get; set; }
     }
 }

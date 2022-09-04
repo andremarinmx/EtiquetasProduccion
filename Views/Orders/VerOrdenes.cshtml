@@ -43,6 +43,10 @@
         <th>
             @Html.DisplayNameFor(model => model.Customer)
         </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Status_)*@
+            Status
+        </th>
         <th></th>
     </tr>
 
@@ -71,6 +75,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Customer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status_)
         </td>
         <td>
             @Html.ActionLink("Editar", "EditarOrden", new { id=item.Id })

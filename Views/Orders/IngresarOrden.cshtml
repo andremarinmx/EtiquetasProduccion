@@ -1,0 +1,163 @@
+﻿@model IEnumerable<EtiquetasProduccion.Models.Order_>
+
+@{
+    ViewBag.Title = "IngresarOrdenes";
+}
+
+<h2>Generar etiqueta</h2>
+
+<table class="table" id="table">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.OrderNumber)*@
+                Order Number
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Width)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Line_)*@
+                Line
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Pcs_Order)*@
+                Order Pcs
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Pcs_Box)*@
+                Box Pcs
+            </th>
+            <th>
+                Completa o Parcial
+            </th>
+            <th>
+                Ingresar piezas
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+    <tbody>
+        <tr>
+            <td class="OrderNumber">
+                @Html.DisplayFor(modelItem => item.OrderNumber)
+            </td>
+            <td class="Height">
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td class="Width">
+                @Html.DisplayFor(modelItem => item.Width)
+            </td>
+            <td class="Line">
+                @Html.DisplayFor(modelItem => item.Line_)
+            </td>
+            <td class="Pcs_Order" value="@Html.DisplayFor(modelItem => item.Pcs_Order)">
+                @Html.DisplayFor(modelItem => item.Pcs_Order)
+            </td>
+            <td class="Pcs_Box" value="@Html.DisplayFor(modelItem => item.Pcs_Box)">
+                @Html.DisplayFor(modelItem => item.Pcs_Box)
+            </td>
+            <td class="Checkboxes">
+                <label>Completa</label>
+                <input type="checkbox" class="Completa">
+                <label>Parcial</label>
+                <input type="checkbox" class="Parcial">
+            </td>
+            <td class="Pcs">
+                <input type="number" value="0" disabled required />
+            </td>
+        </tr>
+    </tbody>
+    }
+
+    </table>
+
+<input id="generar" type="button" value="Generar etiqueta" class="btn btn-success" />
+
+<script type="text/javascript">
+
+    let dato = [];
+    let renglones = document.querySelectorAll('tr');
+    let bandera = false;
+
+    renglones.forEach(function (renglon) {
+        if (!bandera) {
+            bandera = true;
+            return;
+        }
+        let OrderNumber = renglon.querySelector('.OrderNumber');
+        let Height = renglon.querySelector('.Height');
+        let Width = renglon.querySelector('.Width');
+        let Line = renglon.querySelector('.Line');
+        let Pcs_Order = renglon.querySelector('.Pcs_Order');
+        let Pcs_Box = renglon.querySelector('.Pcs_Box');
+        let Pcs = renglon.querySelector('.Pcs');
+        let input = renglon.querySelector('input[type=number]');
+        let Completa = renglon.querySelector('.Completa');
+        let Parcial = renglon.querySelector('.Parcial');
+        let Checkboxes = renglon.querySelector('.Checkboxes');
+
+        Completa.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+                Parcial.checked = false;
+                input.value = Pcs_Order.getAttribute('value');
+                input.disabled = true;
+            }
+        });
+        Parcial.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+                Completa.checked = false;
+                input.disabled = false;
+                input.value = 0;
+                input.setAttribute("onClick", "this.select()");
+            }
+        });
+        if (Pcs_Box.getAttribute('value') == Pcs_Order.getAttribute('value')) {
+            OrderNumber.style.backgroundColor = "#92c5fc";
+            Height.style.backgroundColor = "#92c5fc";
+            Width.style.backgroundColor = "#92c5fc";
+            Line.style.backgroundColor = "#92c5fc";
+            Pcs_Order.style.backgroundColor = "#92c5fc";
+            Pcs_Box.style.backgroundColor = "#779ecb";
+            Checkboxes.style.backgroundColor = "#92c5fc";
+            Pcs.style.backgroundColor = "#92c5fc";
+            Completa.disabled = true;
+            Parcial.disabled = true;
+        }
+    });
+
+    document.querySelector('#generar').addEventListener('click', () =>
+    {
+        document.querySelectorAll('#table tbody tr').forEach(function (renglon) {
+            let OrderNumber = renglon.querySelector('.OrderNumber').textContent;
+            let Height = renglon.querySelector('.Height').textContent;
+            let Width = renglon.querySelector('.Width').textContent;
+            let Line = renglon.querySelector('.Line').textContent;
+            let Pcs_Order = renglon.querySelector('.Pcs_Order').textContent;
+            let input = renglon.querySelector('input[type=number]').value;
+            let obj = {};
+            obj.OrderNumber = OrderNumber.trim();
+            obj.Height = Height.trim();
+            obj.Width = Width.trim();
+            obj.Line = Line.trim();
+            obj.Pcs_Order = Pcs_Order.trim();
+            obj.input = input.trim();
+            if (obj.input > 0) {
+                dato.push(obj);
+            }
+        });
+        console.log(JSON.stringify(dato));
+        $.ajax({
+        type: 'POST',
+        traditional: true,
+        url: '@Url.Action("Folio", "Orders")',
+        data: JSON.stringify(dato),
+        contentType: 'application/json'
+        });
+    });
+
+</script>
