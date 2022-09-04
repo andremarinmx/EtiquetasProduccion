@@ -34,6 +34,7 @@
           <Property Name="Pcs_Order" Type="int" />
           <Property Name="Pcs_Box" Type="int" />
           <Property Name="Status_" Type="int" />
+          <Property Name="Folio" Type="int" />
         </EntityType>
         <EntityType Name="Order_">
           <Key>
@@ -146,6 +147,7 @@
           <Property Name="Pcs_Order" Type="Int32" />
           <Property Name="Pcs_Box" Type="Int32" />
           <Property Name="Status_" Type="Int32" />
+          <Property Name="Folio" Type="Int32" />
         </EntityType>
         <EntityType Name="Order_">
           <Key>
@@ -225,6 +227,7 @@
           <EntitySetMapping Name="Line_Made">
             <EntityTypeMapping TypeName="EtiquetasProduccionModel.Line_Made">
               <MappingFragment StoreEntitySet="Line_Made">
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
                 <ScalarProperty Name="Status_" ColumnName="Status_" />
                 <ScalarProperty Name="Pcs_Box" ColumnName="Pcs_Box" />
                 <ScalarProperty Name="Pcs_Order" ColumnName="Pcs_Order" />

@@ -37,7 +37,8 @@ CREATE TABLE Line_Made(
     Line_ INT,
     Pcs_Order INT,
     Pcs_Box INT,
-    Status_ INT
+    Status_ INT,
+    Folio INT
 );
 
 CREATE TABLE Folio(

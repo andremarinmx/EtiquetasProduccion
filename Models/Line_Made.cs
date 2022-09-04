@@ -22,5 +22,6 @@ namespace EtiquetasProduccion.Models
         public Nullable<int> Pcs_Order { get; set; }
         public Nullable<int> Pcs_Box { get; set; }
         public Nullable<int> Status_ { get; set; }
+        public Nullable<int> Folio { get; set; }
     }
 }
