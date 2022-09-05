@@ -70,36 +70,49 @@ namespace EtiquetasProduccion.Controllers
             }
         }
 
-    [HttpPost]
-    public ActionResult GenerarFolio(IEnumerable<Lineas> data)
-    {
-        using (EtiquetasProduccionContext db = new EtiquetasProduccionContext())
+        [HttpPost]
+        public ActionResult GenerarFolio(IEnumerable<Lineas> data)
         {
-            DateTime now = DateTime.Now;
-            Folio folio = new Folio();
-            Line_Made lineaHechas = new Line_Made();
-            folio.OrderNumber = data.First().OrderNumber;
-            folio.Date_ = now;
-            db.Folio.Add(folio);
-            db.SaveChanges();
-            foreach (var item in data)
+            using (EtiquetasProduccionContext db = new EtiquetasProduccionContext())
             {
-                Order_ orden = db.Order_.Find(item.Line);
-                lineaHechas.Folio = folio.Id;
-                lineaHechas.OrderNumber = item.OrderNumber;
-                lineaHechas.Height = item.Height;
-                lineaHechas.Width = item.Width;
-                lineaHechas.Line_ = item.Line;
-                lineaHechas.Pcs_Order = item.Pcs_Order;
-                lineaHechas.Pcs_Box = item.Input;
-                orden.Pcs_Box = item.Input;
-                db.Line_Made.Add(lineaHechas);
+                DateTime now = DateTime.Now;
+                Folio folio = new Folio();
+                Line_Made lineaHechas = new Line_Made();
+                folio.OrderNumber = data.First().OrderNumber;
+                folio.Date_ = now;
+                db.Folio.Add(folio);
                 db.SaveChanges();
+                foreach (var item in data)
+                {
+                    Order_ orden = db.Order_.Find(item.Line);
+                    lineaHechas.Folio = folio.Id;
+                    lineaHechas.OrderNumber = item.OrderNumber;
+                    lineaHechas.Height = item.Height;
+                    lineaHechas.Width = item.Width;
+                    lineaHechas.Line_ = item.Line;
+                    lineaHechas.Pcs_Order = item.Pcs_Order;
+                    lineaHechas.Pcs_Box = item.Input;
+                    //fecha
+                    //status
+                    orden.Pcs_Box = item.Input;
+                    db.Line_Made.Add(lineaHechas);
+                    db.SaveChanges();
+                }
+                return View();
             }
-            return View();
         }
+
+        [HttpGet]
+        public ActionResult LineasHechas()
+        {
+            using (EtiquetasProduccionContext db = new EtiquetasProduccionContext())
+            {
+                var lineasHechas = db.Line_Made.OrderBy(x => x.OrderNumber).ToList();
+                return View(lineasHechas);
+            }
+        }
+
     }
-}
     public class Lineas
     {
         public string OrderNumber { get; set; }

@@ -1,14 +1,10 @@
-﻿@model IEnumerable<EtiquetasProduccion.Models.Order_>
+﻿@model IEnumerable<EtiquetasProduccion.Models.Line_Made>
 
 @{
-    ViewBag.Title = "VerOrdenes";
+    ViewBag.Title = "LineasHechas";
 }
 
-<h2>Órdenes</h2>
-
-<p>
-    @Html.ActionLink("Crear", "CrearOrden") | @Html.ActionLink("Buscar", "BuscarOrden")
-</p>
+<h2>Lineas Hechas</h2>
 
 <table class="table">
     <tr>
@@ -35,15 +31,11 @@
             Box Pcs
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.Address_)*@
-            Address
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Customer)
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.Status_)*@
             Status
+            @*@Html.DisplayNameFor(model => model.Status_)*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Folio)
         </th>
         <th></th>
     </tr>
@@ -69,17 +61,13 @@
             @Html.DisplayFor(modelItem => item.Pcs_Box)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Address_)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Status_)
         </td>
         <td>
-            @Html.ActionLink("Editar", "EditarOrden", new { id=item.Id }) | 
-            @Html.ActionLink("Eliminar", "EliminarOrden", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.Folio)
+        </td>
+        <td>
+            @Html.ActionLink("Detalles", "DetallesLineasHechas", new { id=item.Id })
         </td>
     </tr>
 }

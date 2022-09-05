@@ -220,6 +220,7 @@
     <Content Include="Views\Orders\VerOrdenes.cshtml" />
     <Content Include="Views\Orders\BuscarOrden.cshtml" />
     <Content Include="Views\Orders\IngresarOrden.cshtml" />
+    <Content Include="Views\Orders\LineasHechas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
