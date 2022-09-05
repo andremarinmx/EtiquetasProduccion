@@ -7,11 +7,9 @@
 <h2>Órdenes</h2>
 
 <p>
-    @Html.ActionLink("Crear", "BuscarOrden")
+    @Html.ActionLink("Crear", "BuscarOrden") | @Html.ActionLink("Buscar", "CrearOrden")
 </p>
-<p>
-    @Html.ActionLink("Buscar", "CrearOrden")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -80,7 +78,7 @@
             @Html.DisplayFor(modelItem => item.Status_)
         </td>
         <td>
-            @Html.ActionLink("Editar", "EditarOrden", new { id=item.Id })
+            @Html.ActionLink("Editar", "EditarOrden", new { id=item.Id }) | 
             @Html.ActionLink("Eliminar", "EliminarOrden", new { id=item.Id })
         </td>
     </tr>
